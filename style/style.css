@@ -96,9 +96,10 @@ body{
     width: 138px;
     transition: .5s;
 }
-.category-block__button:hover{
-    background: #FF868E;
-    color: #fff;
+.category-block__button:hover,
+.category-block__button .hover{
+    background: #FBE0DC;
+    color: #FF868E;
     transition: .5s;
 }
 
@@ -119,14 +120,21 @@ body{
     position: relative;
     margin-right: 30px;
 }
-.main{
+.main, .main-body{
    padding: 20px 20px 0 20px;
    width: 640px;
+}
+.main-body{
+    background-color: #fff;
+    padding-top: 0;
+    padding-bottom: 20px;
+    border-radius: 20px;
 }
 .main__img{
     position: absolute;
     top: -30px;
     left: -65px;
+    z-index: 10;
 }
 
 .main-container{
@@ -141,11 +149,13 @@ body{
     margin-bottom: 20px;
 }
 
-
+.image-container__img{
+    border-radius: 20px;
+}
 .main-header{
     display: flex;
     margin-bottom: 10px;
-    
+    border-radius: 20px;
     align-items: center;
     background: #FBE0DC;
     width: 680px;
@@ -275,12 +285,12 @@ body{
 } */
 
 /* card cat */
-.main-breed{
+.main-breed, .main-container-head{
     display: flex;
     align-items: center;
     margin-bottom: 20px;
 }
-.main-breed__back{
+.main-breed__back, .main-container-head__back{
     display: flex;
     align-items: center;
     background: #FBE0DC;
@@ -303,7 +313,7 @@ body{
     padding: 5px 30px;
     color: #FF868E;
 }
-.main-breed_id{
+.main-breed_id, .main-container-head__name{
     padding: 5px 30px;
     font-weight: 500;
     font-size: 20px;
@@ -314,6 +324,52 @@ body{
     background: #FF868E;
     border-radius: 10px;
     margin: 0;
+}
+.main-container-head__back{
+    width: 40px;
+    height: 40px;
+}
+.main-container-head__name{
+    margin-right: 10px;
+}
+.main-container-head__select{
+    background-color: #F8F8F7;
+    border-radius: 10px;
+    /* padding: 8px 10px; */
+    padding: 8px 70px 8px 10px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: #8C8C8C;
+    outline: none;
+    border: none;
+    -moz-appearance: none;
+	-webkit-appearance: none;
+    background: url("../image/icons/arrow_down.svg") no-repeat right center ;
+    background-position-x: calc(100% - 10px);
+    cursor: pointer;
+    margin-right: 10px;
+}
+#select-bg{
+    background-color: #F8F8F7;
+}
+.main-container-head__select::-ms-expand {
+	display: none;
+}
+.main-container-head__select_limit{
+    padding: 8px 30px 8px 10px;
+}
+.sort-up__image, .sort-down__image{
+    fill: #8C8C8C;
+}
+.sort{
+    padding: 9px 11px;
+    background: #F8F8F7;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.sort-up{
+    margin-right: 10px;
 }
 .main-top{
     margin-bottom: 50px;

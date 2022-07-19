@@ -14,6 +14,8 @@ const openBreeds = () => {
     main.style.background = "#fff";
     mainHeader.style.background = "#F8F8F7";
     mainWrapper.style.background = "#F8F8F7";
+    buttonBreeds.style.background = "#FF868E";
+    buttonBreeds.style.color = "#FFF";
     initBreads();
 }
 

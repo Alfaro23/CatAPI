@@ -1,3 +1,5 @@
+import {openBreeds, openGallery, header} from "./main.js";
+
 const initBreads = () => {
 
     const main = document.querySelector(".main");
@@ -16,29 +18,6 @@ const initBreads = () => {
     let select = document.querySelector("#select-bg");
     console.log(select)
     
-
-    const header = 
-    `
-        
-            <div class="main-input">
-                <input type="text" class="main-input__input" placeholder="Search for breeds by name">
-                <button class="main-input__button">
-                    <img src="./image/icons/search.svg" alt="search" class="main-input__img">
-                </button> 
-            </div>
-            <div class="main-buttons">
-                <button class="main-buttons__button main-buttons__button_smile">
-                    <img src="./image/icons/smile.svg" alt="smile" class="main-buttons__img">
-                </button> 
-                <button class="main-buttons__button main-buttons__button_hart">
-                    <img src="./image/icons/hart.svg" alt="hart" class="main-buttons__img">
-                </button> 
-                <button class="main-buttons__button main-buttons__button_sad">
-                    <img src="./image/icons/sad.svg" alt="sad" class="main-buttons__img">
-                </button> 
-            </div>
-        
-    `
     const headerContainer = 
     `
         <div class="main-container-head">
@@ -48,8 +27,6 @@ const initBreads = () => {
             <p class="main-container-head__name">BREEDS</p>
             <select id="select-bg" name="breeds" class="main-container-head__select main-container-head__select_breeds">
                 <option value="All breeds"selected>All breeds</option>
-                <option value="value2">Abyssian</option>
-                <option value="value3">Aegean</option>
             </select>
             <select id="select-bg" name="breeds" class="main-container-head__select main-container-head__select_limit">
                 <option value="5">Limit: 5</option>
@@ -67,7 +44,6 @@ const initBreads = () => {
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M3.80474 19.319V0H5.13807V19.319L8 16.1995L8.94281 17.2272L4.94281 21.5872C4.81778 21.7234 4.64822 21.8 4.4714 21.8C4.29459 21.8 4.12502 21.7234 4 21.5872L0 17.2272L0.942809 16.1995L3.80474 19.319ZM15.1381 1.45333C14.0335 1.45333 13.1381 2.42935 13.1381 3.63333V5.81333H17.1381V3.63333C17.1381 2.42935 16.2426 1.45333 15.1381 1.45333ZM17.1381 7.26667V10.1733H18.4714V3.63333C18.4714 1.6267 16.979 0 15.1381 0C13.2971 0 11.8047 1.6267 11.8047 3.63333V10.1733H13.1381V7.26667H17.1381ZM11.8047 11.6267H15.8047C17.2775 11.6267 18.4714 12.928 18.4714 14.5333C18.4714 15.4015 18.1222 16.1807 17.5686 16.7133C18.1222 17.2459 18.4714 18.0252 18.4714 18.8933C18.4714 20.4986 17.2775 21.8 15.8047 21.8H11.8047V11.6267ZM15.8047 15.9867C16.5411 15.9867 17.1381 15.336 17.1381 14.5333C17.1381 13.7307 16.5411 13.08 15.8047 13.08H13.1381V15.9867H15.8047ZM13.1381 17.44H15.8047C16.5411 17.44 17.1381 18.0907 17.1381 18.8933C17.1381 19.696 16.5411 20.3467 15.8047 20.3467H13.1381V17.44Z"/>
                 </svg>
             </div>
-            <div class="sort_down"></div>
         </div>
     `
 
@@ -82,6 +58,13 @@ const initBreads = () => {
     `
 
     //drawnng head in main
+
+    let mainBody = document.createElement("div");
+    mainBody.classList.add("main-body");
+    mainBody.style.paddingLeft = 0;
+    mainBody.style.paddingRight = 0;
+    main.insertAdjacentElement("afterbegin", mainBody);
+
     let mainHead = document.createElement("div");
     mainHead.classList.add("main-head");
     main.insertAdjacentElement("afterbegin", mainHead);
@@ -89,9 +72,7 @@ const initBreads = () => {
 
     const mainContainerBack = document.querySelector(".main-container-head__back");
 
-    let mainBody = document.createElement("div");
-    mainBody.classList.add("main-body");
-    main.insertAdjacentElement("afterend", mainBody);
+    
     // mainBody.insertAdjacentHTML("afterbegin", headerContainer);
 
     console.log(chekCount)
@@ -124,7 +105,7 @@ const initBreads = () => {
                 console.log(catsArr[num])
                 console.log(num)
 
-                
+                main.innerHTML = ""
                 mainBody.innerHTML =""
                 mainHead.innerHTML = ""
                 // const test = document.querySelector(".");
@@ -177,7 +158,7 @@ const initBreads = () => {
 
                 `
                 main.insertAdjacentHTML("beforeend", cardCat);
-                console.log(metric, name, temperament, life_span, origin,description, url)
+                // console.log(metric, name, temperament, life_span, origin,description, url)
                 const backArrow = document.querySelector(".main-breed__back");
 
                 backArrow.addEventListener("click", () => {
@@ -187,32 +168,80 @@ const initBreads = () => {
 
                     mainHeader.insertAdjacentHTML("afterbegin", header);
 
+                    let mainBody = document.createElement("div");
+                    mainBody.classList.add("main-body");
+                    mainBody.style.paddingLeft = 0;
+                    mainBody.style.paddingRight = 0;
+                    main.insertAdjacentElement("beforeend", mainBody);  
+
                     let mainHead = document.createElement("div");
                     mainHead.classList.add("main-head");
                     main.insertAdjacentElement("afterbegin", mainHead);
                     mainHead.insertAdjacentHTML("afterbegin", headerContainer);
-
                     
+                    // drawCatCard()
+                    nextDraw(mainBody);
+                    console.log(1)
                     drawHeadBreeds();
-
-                    prevDraw();
+                    console.log(2)
                     mainWrapper.insertAdjacentHTML("beforeend", footer);
                     const buttonNext = document.querySelector(".main-footer__button_next");
                     const buttonPrev = document.querySelector(".main-footer__button_prev");
+
+                    const selectBreeds = document.querySelector(".main-container-head__select_breeds");
+                    selectBreeds.addEventListener("change", () => {
+                        console.log(selectBreeds.value)
+                        mainBody.innerHTML = "";
+            
+                        let mainContainer = document.createElement("div");
+                        // mainContainer.classList.add("main-container");
+                        mainBody.insertAdjacentElement("beforeend", mainContainer);
+            
+                        // let mainContainer2 = document.createElement("div");
+                        // mainContainer2.classList.add("main-container");
+                        // mainBody.insertAdjacentElement("beforeend", mainContainer2);
+            
+                        for(let i = 0; i <= catsArr.length; i++){
+                            console.log(catsArr[i].name)
+                            
+                            if(catsArr[i].name == selectBreeds.value && catsArr[i].name != undefined){
+                                
+                                const card = 
+                                `
+                                    <div class="test${i} image-container" style="width:100%; height: 100%;"><div class="hover" id="${catsArr[i].id}"><p class="hover__text">${catsArr[i].name}</p></div><img class="image-container__img" src="${catsArr[i].image.url}"  alt="${catsArr[i].name}" width="100%" height="100%"></img></div>
+                                `
+            
+                                mainContainer.insertAdjacentHTML("beforeend", card);
+                                const catImage = document.querySelector(".image-container")
+                                catImage.addEventListener("click", (event) => {
+                                    console.log("in preDraw");
+                                    console.log(event.target);
+                                    openCard(event.target.id);
+                                });
+                            }
+                            if(selectBreeds.value == "All breeds"){
+                                console.log("hi");
+                                nextDraw(mainBody);
+                                break;
+                            }
+            
+                            
+                        }
+                    })
                     
                     buttonNext.addEventListener("click", () => {
                         
                         page++;
                         console.log(page);
                         chekPage(page, buttonNext, buttonPrev);
-                        nextDraw();
+                        nextDraw(mainBody);
                         
                     });
                     buttonPrev.addEventListener("click", () => {
                         console.log(lastCat)
                         page--;
                         chekPage(page, buttonNext, buttonPrev);
-                        prevDraw();
+                        prevDraw(mainBody);
                     });
                 })
             }
@@ -220,7 +249,7 @@ const initBreads = () => {
     }
 
     //test
-    const nextDraw = () => {
+    const nextDraw = (mainBody) => {
         let last = localStorage.getItem("last");
         
         counter++
@@ -278,7 +307,7 @@ const initBreads = () => {
         })
         
     }
-    const prevDraw = () => {
+    const prevDraw = (mainBody) => {
         let last = localStorage.getItem("last") ;
         // const buttonNext = document.querySelector(".main-footer__button_next");
         // const buttonPrev = document.querySelector(".main-footer__button_prev");
@@ -356,7 +385,7 @@ const initBreads = () => {
 
     function drawCatCard(element){
 
-        nextDraw();
+        nextDraw(mainBody);
         drawHeadBreeds()
         
         // main.insertAdjacentHTML("beforeend", card);
@@ -378,14 +407,14 @@ const initBreads = () => {
             page++;
             console.log(page);
             chekPage(page, buttonNext, buttonPrev);
-            nextDraw();
+            nextDraw(mainBody);
             
         });
         buttonPrev.addEventListener("click", () => {
             console.log(lastCat)
             page--;
             chekPage(page, buttonNext, buttonPrev);
-            prevDraw();
+            prevDraw(mainBody);
         });
     }
 
@@ -427,8 +456,11 @@ const initBreads = () => {
 
 
             const buttonBreeds = document.querySelector(".category-block__button_breeds");
+            const buttonGallery = document.querySelector(".category-block__button_gallery");
             buttonBreeds.style.background = "#FFF";
             buttonBreeds.style.color = "#FF868E";
+            buttonBreeds.addEventListener("click", openBreeds);
+            buttonGallery.addEventListener("click", openGallery);
             // buttonBreeds.classList.add("hover");
             // mainWrapper.innerHTML = ""
         });
@@ -446,8 +478,9 @@ const initBreads = () => {
             // mainBody.insertAdjacentElement("beforeend", mainContainer2);
 
             for(let i = 0; i <= catsArr.length; i++){
+                console.log(catsArr[i].name)
                 
-                if(catsArr[i].name == selectBreeds.value){
+                if(catsArr[i].name == selectBreeds.value && catsArr[i].name != undefined){
                     
                     const card = 
                     `
@@ -464,7 +497,7 @@ const initBreads = () => {
                 }
                 if(selectBreeds.value == "All breeds"){
                     console.log("hi");
-                    nextDraw();
+                    nextDraw(mainBody);
                     break;
                 }
 

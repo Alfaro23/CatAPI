@@ -6,23 +6,19 @@ const initBreads = () => {
     const mainHeader = document.querySelector(".main-header");
     const mainWrapper = document.querySelector(".main-wrapper");
     let catsArr = [];
-    let countTest = localStorage.setItem("last", 0);
-    let getTest = localStorage.getItem("last");
-    let counter = 0;
-    var chekCount = 0;
-    let testArrLenght = 0;
     let page = 0;
     let lastCat = {
         lastPage: false,
     };
-    let select = document.querySelector("#select-bg");
-    console.log(select)
+    const categoryLink = document.querySelector(".category__link");
     
     const headerContainer = 
     `
         <div class="main-container-head">
             <button class="main-container-head__back">
-                <img src="./image/icons/leftArrowCard.svg" alt="left_arrow" class="main-container-head__img">
+                <svg width="12" height="20" viewBox="0 0 12 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="main-container-head__img">
+                    <path d="M0.709994 10.9901L9.30969 19.5896C9.85669 20.1369 10.7437 20.1369 11.2905 19.5896C11.8373 19.0427 11.8373 18.1558 11.2905 17.6091L3.68104 9.99988L11.2902 2.39096C11.8371 1.84391 11.8371 0.957107 11.2902 0.410284C10.7434 -0.136761 9.85649 -0.136761 9.30949 0.410284L0.709774 9.00985C0.436354 9.28339 0.299805 9.64153 0.299805 9.99983C0.299805 10.3583 0.436624 10.7167 0.709994 10.9901Z" />
+                </svg>
             </button>
             <p class="main-container-head__name">BREEDS</p>
             <select id="select-bg" name="breeds" class="main-container-head__select main-container-head__select_breeds">
@@ -56,7 +52,6 @@ const initBreads = () => {
             </div>
         
     `
-
     //drawnng head in main
 
     let mainBody = document.createElement("div");
@@ -69,14 +64,6 @@ const initBreads = () => {
     mainHead.classList.add("main-head");
     main.insertAdjacentElement("afterbegin", mainHead);
     mainHead.insertAdjacentHTML("afterbegin", headerContainer);
-
-    const mainContainerBack = document.querySelector(".main-container-head__back");
-
-    
-    // mainBody.insertAdjacentHTML("afterbegin", headerContainer);
-
-    console.log(chekCount)
-    // let first = localStorage.getItem("key");
 
     
 
@@ -102,13 +89,10 @@ const initBreads = () => {
         mainFooter.remove();
         for(let num = 0; num <= catsArr.length; num++){
             if(catsArr[num].id == elem){
-                console.log(catsArr[num])
-                console.log(num)
-
+                
                 main.innerHTML = ""
                 mainBody.innerHTML =""
                 mainHead.innerHTML = ""
-                // const test = document.querySelector(".");
 
                 let {name,temperament,life_span,origin, weight: {metric}, description, image:{url}} = catsArr[num]
 
@@ -158,15 +142,27 @@ const initBreads = () => {
 
                 `
                 main.insertAdjacentHTML("beforeend", cardCat);
-                // console.log(metric, name, temperament, life_span, origin,description, url)
+                
                 const backArrow = document.querySelector(".main-breed__back");
 
                 backArrow.addEventListener("click", () => {
                     main.innerHTML = "";
-                    // mainBody.innerHTML =""
                     mainHeader.innerHTML ="";
 
                     mainHeader.insertAdjacentHTML("afterbegin", header);
+
+                    const searchBaackGround = document.querySelector(".main-input__button");
+                    const searchIcon = document.querySelector(".main-input__img");
+
+                    if(searchBaackGround){
+                        console.log(true)
+                        searchBaackGround.addEventListener("mouseover", () => {
+                            searchIcon.setAttribute("style", "fill: #fff; transition: .5s;");
+                        });
+                        searchBaackGround.addEventListener("mouseout", () => {
+                            searchIcon.setAttribute("style", "fill: #FF868E; transition: .5s;");
+                        });
+                    }
 
                     let mainBody = document.createElement("div");
                     mainBody.classList.add("main-body");
@@ -178,49 +174,40 @@ const initBreads = () => {
                     mainHead.classList.add("main-head");
                     main.insertAdjacentElement("afterbegin", mainHead);
                     mainHead.insertAdjacentHTML("afterbegin", headerContainer);
+
                     
-                    // drawCatCard()
+                    
                     nextDraw(mainBody);
-                    console.log(1)
                     drawHeadBreeds();
-                    console.log(2)
+                    
                     mainWrapper.insertAdjacentHTML("beforeend", footer);
                     const buttonNext = document.querySelector(".main-footer__button_next");
                     const buttonPrev = document.querySelector(".main-footer__button_prev");
 
                     const selectBreeds = document.querySelector(".main-container-head__select_breeds");
                     selectBreeds.addEventListener("change", () => {
-                        console.log(selectBreeds.value)
+    
                         mainBody.innerHTML = "";
             
                         let mainContainer = document.createElement("div");
-                        // mainContainer.classList.add("main-container");
                         mainBody.insertAdjacentElement("beforeend", mainContainer);
             
-                        // let mainContainer2 = document.createElement("div");
-                        // mainContainer2.classList.add("main-container");
-                        // mainBody.insertAdjacentElement("beforeend", mainContainer2);
-            
                         for(let i = 0; i <= catsArr.length; i++){
-                            console.log(catsArr[i].name)
                             
                             if(catsArr[i].name == selectBreeds.value && catsArr[i].name != undefined){
                                 
                                 const card = 
                                 `
-                                    <div class="test${i} image-container" style="width:100%; height: 100%;"><div class="hover" id="${catsArr[i].id}"><p class="hover__text">${catsArr[i].name}</p></div><img class="image-container__img" src="${catsArr[i].image.url}"  alt="${catsArr[i].name}" width="100%" height="100%"></img></div>
+                                    <div class="cat${i} image-container" style="width:100%; height: 100%;"><div class="hover" id="${catsArr[i].id}"><p class="hover__text">${catsArr[i].name}</p></div><img class="image-container__img" src="${catsArr[i].image.url}"  alt="${catsArr[i].name}" width="100%" height="100%"></img></div>
                                 `
             
                                 mainContainer.insertAdjacentHTML("beforeend", card);
                                 const catImage = document.querySelector(".image-container")
                                 catImage.addEventListener("click", (event) => {
-                                    console.log("in preDraw");
-                                    console.log(event.target);
                                     openCard(event.target.id);
                                 });
                             }
                             if(selectBreeds.value == "All breeds"){
-                                console.log("hi");
                                 nextDraw(mainBody);
                                 break;
                             }
@@ -230,15 +217,12 @@ const initBreads = () => {
                     })
                     
                     buttonNext.addEventListener("click", () => {
-                        
                         page++;
-                        console.log(page);
                         chekPage(page, buttonNext, buttonPrev);
                         nextDraw(mainBody);
                         
                     });
                     buttonPrev.addEventListener("click", () => {
-                        console.log(lastCat)
                         page--;
                         chekPage(page, buttonNext, buttonPrev);
                         prevDraw(mainBody);
@@ -248,14 +232,9 @@ const initBreads = () => {
         }
     }
 
-    //test
     const nextDraw = (mainBody) => {
         let last = localStorage.getItem("last");
-        
-        counter++
-        chekCount += counter;
-        
-
+       
         mainBody.innerHTML = "";
 
         let mainContainer = document.createElement("div");
@@ -269,18 +248,14 @@ const initBreads = () => {
         for(let i = 0; i <= catsArr.length; i++){
             
             const card = `
-                <div class="test${i} image-container"><div class="hover" id="${catsArr[last].id}"><p class="hover__text">${catsArr[last].name}</p></div><img src="${catsArr[last].image.url}"  alt="${catsArr[last].name}" width="100%" height="100%"></img></div>
+                <div class="cat${i} image-container"><div class="hover" id="${catsArr[last].id}"><p class="hover__text">${catsArr[last].name}</p></div><img src="${catsArr[last].image.url}"  alt="${catsArr[last].name}" width="100%" height="100%"></img></div>
         
             `
             
-            
-            // console.log(card);
             if(i <= 4){
                 mainContainer.insertAdjacentHTML("beforeend", card);
-                // card.addEventListener("click", openCard)
             }else if(i <= 9){
                 mainContainer2.insertAdjacentHTML("beforeend", card);
-                // card.addEventListener("click", openCard)
             }
             if(last === catsArr.length - 1){
                 lastCat.lastPage = true
@@ -288,20 +263,15 @@ const initBreads = () => {
 
             if( i >= 9){
                 localStorage.setItem("last", last);
-                // console.log("test" + localStorage.getItem("last"))
                 break;
             }
             
-            // console.log()
             last++
-            testArrLenght += last
-            
         }
         
         const catImage = document.querySelectorAll(".image-container")
             catImage.forEach((elem) => {
                 elem.addEventListener("click", (event) => {
-                    // console.log(event.target.id);
                     openCard(event.target.id);
                 });
         })
@@ -309,10 +279,7 @@ const initBreads = () => {
     }
     const prevDraw = (mainBody) => {
         let last = localStorage.getItem("last") ;
-        // const buttonNext = document.querySelector(".main-footer__button_next");
-        // const buttonPrev = document.querySelector(".main-footer__button_prev");
-        counter--
-        chekCount -= counter
+        
         mainBody.innerHTML = "";
 
         let mainContainer = document.createElement("div");
@@ -324,15 +291,12 @@ const initBreads = () => {
         mainBody.insertAdjacentElement("beforeend", mainContainer2);
 
         for(let i = 0; i <= catsArr.length; i++){
-            //localStorage.
-            // console.log();
+            
             last--
             const card = `
-                <div class="test${i} image-container"><div class="hover" id="${catsArr[last].id}"><p class="hover__text">${catsArr[last].name}</p></div><img src="${catsArr[last].image.url}" id="" alt="${catsArr[last].name}" width="100%" height="100%"></img></div>
+                <div class="cat${i} image-container"><div class="hover" id="${catsArr[last].id}"><p class="hover__text">${catsArr[last].name}</p></div><img src="${catsArr[last].image.url}" id="" alt="${catsArr[last].name}" width="100%" height="100%"></img></div>
         
             `
-            
-            // console.log(card);
             if(i <= 4){
                 mainContainer2.insertAdjacentHTML("beforeend", card);
             }else if(i <= 9){
@@ -346,36 +310,27 @@ const initBreads = () => {
             }
             
         }
-        // main.insertAdjacentHTML("afterbegin", headerContainer);
+        
         const catImage = document.querySelectorAll(".image-container")
             catImage.forEach((elem) => {
                 elem.addEventListener("click", (event) => {
-                    console.log("in preDraw");
-                    console.log(event.target.id);
                     openCard(event.target.id);
                 });
             })
     }
-    //
 
     function chekPage(page, buttonNext, buttonPrev){
-        console.log(page)
-        // console.log(element)
+        
         if(page > 0  || page === 0){
-            console.log("delete")
-            console.log(buttonPrev)
             buttonPrev.removeAttribute("disabled", true);
             
         } else{
-            console.log("add")
             buttonPrev.setAttribute("disabled", true);
         }
 
-        console.log(lastCat)
         if(lastCat.lastPage){
             
             lastCat.lastPage = false;
-            console.log(lastCat.lastPage)
             buttonNext.setAttribute("disabled", true)
         } else{
             lastCat.lastPage = false;
@@ -388,115 +343,146 @@ const initBreads = () => {
         nextDraw(mainBody);
         drawHeadBreeds()
         
-        // main.insertAdjacentHTML("beforeend", card);
         mainHeader.insertAdjacentHTML("afterbegin", header);
-        // main.insertAdjacentHTML("afterbegin", headerContainer);
         mainWrapper.insertAdjacentHTML("beforeend", footer);
+
+        const searchBaackGround = document.querySelector(".main-input__button");
+        const searchIcon = document.querySelector(".main-input__img");
+
+        
+        if(searchBaackGround){
+            searchBaackGround.addEventListener("mouseover", () => {
+                searchIcon.setAttribute("style", "fill: #fff; transition: .5s;");
+            });
+            searchBaackGround.addEventListener("mouseout", () => {
+                searchIcon.setAttribute("style", "fill: #FF868E; transition: .5s;");
+            });
+        }
+
+        const headBack = document.querySelector(".main-container-head__back");
+        const headImg = document.querySelector(".main-container-head__img");
+
+        console.log(headImg)
+
+        if(headBack){
+            
+            headBack.addEventListener("mouseover", () => {
+                headImg.setAttribute("style", "fill: #fff; transition: .5s;");
+            });
+            headBack.addEventListener("mouseout", () => {
+                headImg.setAttribute("style", "fill: #FF868E; transition: .5s;");
+            });
+        }
+        
+        const sortUpBlock = document.querySelector(".sort-up")
+        const sortDownBlock = document.querySelector(".sort-down")
+        const sortUp = document.querySelector(".sort-up__image");
+        const sortDown = document.querySelector(".sort-down__image");
+
+        if(sortUpBlock && sortDownBlock){
+            
+            sortUpBlock.addEventListener("mouseover", () => {
+                sortUp.setAttribute("style", "fill: #FF868E; transition: .5s;");
+            });
+            sortUpBlock.addEventListener("mouseout", () => {
+                sortUp.setAttribute("style", "fill: #8C8C8C; transition: .5s;");
+            });
+
+            sortDownBlock.addEventListener("mouseover", () => {
+                sortDown.setAttribute("style", "fill: #FF868E; transition: .5s;");
+            });
+            sortDownBlock.addEventListener("mouseout", () => {
+                sortDown.setAttribute("style", "fill: #8C8C8C; transition: .5s;");
+            });
+        }
+
 
         const buttonNext = document.querySelector(".main-footer__button_next");
         const buttonPrev = document.querySelector(".main-footer__button_prev");
-        // const buttonId = document.querySelector("#prev");
         
         buttonPrev.setAttribute("disabled", true);
-        // console.log(counter)
-        // console.log(chekCount)
         
-
         buttonNext.addEventListener("click", () => {
             
             page++;
-            console.log(page);
             chekPage(page, buttonNext, buttonPrev);
             nextDraw(mainBody);
             
         });
         buttonPrev.addEventListener("click", () => {
-            console.log(lastCat)
             page--;
             chekPage(page, buttonNext, buttonPrev);
             prevDraw(mainBody);
         });
     }
 
+
+    const closeCat = () => {
+        main.innerHTML = ""
+        mainBody.remove()
+        mainHeader.innerHTML = ""
+        const footer = document.querySelector(".main-footer");
+        footer.remove();
+
+        mainHeader.style.background = "#FBE0DC"
+        mainHeader.style.marginBottom = 0
+        main.style.background = "#FBE0DC"
+
+        const mainImage = document.querySelector(".main__img");
+        mainImage.classList.remove("hidden")
+            
+        const buttonBreeds = document.querySelector(".category-block__button_breeds");
+        const buttonGallery = document.querySelector(".category-block__button_gallery");
+        buttonBreeds.style.background = "#FFF";
+        buttonBreeds.style.color = "#FF868E";
+        buttonBreeds.addEventListener("click", openBreeds);
+        buttonGallery.addEventListener("click", openGallery);
+    }
+
     function drawHeadBreeds(){
-        // mainHead.insertAdjacentHTML("afterbegin", headerContainer);
+
         const selectBreeds = document.querySelector(".main-container-head__select_breeds");
         const mainContainerBack = document.querySelector(".main-container-head__back");
 
+        
+
         for(let j = 0; j <= catsArr.length; j++){
-            console.log(catsArr[j])
+        
             if(catsArr[j] != undefined){
                 const breed =
                 `
                     <option value="${catsArr[j].name}">${catsArr[j].name}</option>
                 `
-                // console.log(selectBreeds)
                 selectBreeds.insertAdjacentHTML("beforeend", breed)
             } 
             
         }
 
-        mainContainerBack.addEventListener("click", () => {
-            console.log("hi bitch");
-            main.innerHTML = ""
-            mainBody.remove()
-            // mainFooter.innerHTML = ""
-            mainHeader.innerHTML = ""
-            const footer = document.querySelector(".main-footer");
-            footer.remove();
-
-            mainHeader.style.background = "#FBE0DC"
-            mainHeader.style.marginBottom = 0
-            main.style.background = "#FBE0DC"
-
-            const mainImage = document.querySelector(".main__img");
-            console.log(mainImage);
-            mainImage.classList.remove("hidden")
-            // mainWrapper.insertAdjacentHTML("afterbegin", imageMain);
-
-
-            const buttonBreeds = document.querySelector(".category-block__button_breeds");
-            const buttonGallery = document.querySelector(".category-block__button_gallery");
-            buttonBreeds.style.background = "#FFF";
-            buttonBreeds.style.color = "#FF868E";
-            buttonBreeds.addEventListener("click", openBreeds);
-            buttonGallery.addEventListener("click", openGallery);
-            // buttonBreeds.classList.add("hover");
-            // mainWrapper.innerHTML = ""
-        });
+        mainContainerBack.addEventListener("click", closeCat);
         
         selectBreeds.addEventListener("change", () => {
-            console.log(selectBreeds.value)
+            
             mainBody.innerHTML = "";
 
             let mainContainer = document.createElement("div");
-            // mainContainer.classList.add("main-container");
             mainBody.insertAdjacentElement("beforeend", mainContainer);
 
-            // let mainContainer2 = document.createElement("div");
-            // mainContainer2.classList.add("main-container");
-            // mainBody.insertAdjacentElement("beforeend", mainContainer2);
-
             for(let i = 0; i <= catsArr.length; i++){
-                console.log(catsArr[i].name)
                 
                 if(catsArr[i].name == selectBreeds.value && catsArr[i].name != undefined){
                     
                     const card = 
                     `
-                        <div class="test${i} image-container" style="width:100%; height: 100%;"><div class="hover" id="${catsArr[i].id}"><p class="hover__text">${catsArr[i].name}</p></div><img class="image-container__img" src="${catsArr[i].image.url}"  alt="${catsArr[i].name}" width="100%" height="100%"></img></div>
+                        <div class="cat${i} image-container" style="width:100%; height: 100%;"><div class="hover" id="${catsArr[i].id}"><p class="hover__text">${catsArr[i].name}</p></div><img class="image-container__img" src="${catsArr[i].image.url}"  alt="${catsArr[i].name}" width="100%" height="100%"></img></div>
                     `
 
                     mainContainer.insertAdjacentHTML("beforeend", card);
                     const catImage = document.querySelector(".image-container")
                     catImage.addEventListener("click", (event) => {
-                        console.log("in preDraw");
-                        console.log(event.target);
                         openCard(event.target.id);
                     });
                 }
                 if(selectBreeds.value == "All breeds"){
-                    console.log("hi");
                     nextDraw(mainBody);
                     break;
                 }
@@ -506,12 +492,13 @@ const initBreads = () => {
         })
     }
 
+    categoryLink.addEventListener("click", closeCat);
+
 
     function init(){
         getData("https://api.thecatapi.com/v1/breeds").then(data => {
             data.forEach(element => {
-                // catsArr.push(element);
-            // console.log(element)
+                
             if(element.hasOwnProperty("image") && element.hasOwnProperty("name")){
                 catsArr.push(element);
             } else{
@@ -521,12 +508,8 @@ const initBreads = () => {
             });
             
             drawCatCard(catsArr);
-            console.log(catsArr);
-            
         })
     }
-
-
 
     init()
 

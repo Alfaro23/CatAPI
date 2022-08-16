@@ -22,4 +22,4 @@ ___
 
 ## Current project link
 
-### [latest version](https://test-task-catapi.netlify.app/)
+### [latest version](https://project-catapi.netlify.app/)
